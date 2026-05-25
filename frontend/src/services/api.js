@@ -1,16 +1,22 @@
 import axios from 'axios';
 
-const API_URL = 'http://127.0.0.1:8000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
+
   baseURL: `${API_URL}/api`,
+
   headers: {
+
     'Content-Type': 'application/json',
+
   },
+
 });
 
 
 // Add token automatically
+
 api.interceptors.request.use(
 
   (config) => {
@@ -35,7 +41,7 @@ api.interceptors.request.use(
 );
 
 
-// Authentication Service
+// Authentication
 
 export const authService = {
 
@@ -63,12 +69,12 @@ export const authService = {
   ),
 
 
-  login:async(
+  login: async(
 
     email,
     password
 
-  )=>{
+  ) => {
 
     const response = await api.post(
 
@@ -83,7 +89,7 @@ export const authService = {
 
     );
 
-    if(
+    if (
 
       response.data.access
 
@@ -92,7 +98,6 @@ export const authService = {
       localStorage.setItem(
 
         'access_token',
-
         response.data.access
 
       );
@@ -100,7 +105,6 @@ export const authService = {
       localStorage.setItem(
 
         'refresh_token',
-
         response.data.refresh
 
       );
@@ -127,11 +131,11 @@ export const authService = {
 
   getProfile:()=>
 
-  api.get(
+    api.get(
 
-    '/users/me/'
+      '/users/me/'
 
-  )
+    )
 
 };
 
@@ -147,16 +151,21 @@ export const resumeService = {
 
   )=>{
 
-    const formData = new FormData();
+    const formData =
+    new FormData();
 
     formData.append(
+
       'file',
       file
+
     );
 
     formData.append(
+
       'title',
       title
+
     );
 
     return api.post(
@@ -170,6 +179,7 @@ export const resumeService = {
         headers:{
 
           'Content-Type':
+
           'multipart/form-data'
 
         }
@@ -181,30 +191,22 @@ export const resumeService = {
   },
 
 
-  list:()=>api.get(
+  list:()=>
 
-    '/resumes/'
+    api.get(
 
-  ),
+      '/resumes/'
 
-
-  // NEW
-  getResume:(id)=>
-
-  api.get(
-
-    `/resumes/${id}/`
-
-  ),
+    ),
 
 
   delete:(id)=>
 
-  api.delete(
+    api.delete(
 
-    `/resumes/${id}/`
+      `/resumes/${id}/`
 
-  )
+    )
 
 };
 
@@ -235,11 +237,15 @@ export const jobService = {
 
   ),
 
-  list:()=>api.get(
 
-    '/jobs/'
+  list:()=>
 
-  ),
+    api.get(
+
+      '/jobs/'
+
+    ),
+
 
   delete:(id)=>
 
