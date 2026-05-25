@@ -132,10 +132,10 @@ Access at: `http://localhost:8000/admin/`
 # Django
 DEBUG=True
 SECRET_KEY=your-secret-key
-ALLOWED_HOSTS=localhost,127.0.0.1
+ALLOWED_HOSTS=localhost,127.0.0.1,resumeiq-production.up.railway.app
 
 # Frontend
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL=https://resume-iq-uwew-mkw9zd0bj-majjiprasad9949s-projects.vercel.app
 
 # Database
 DB_NAME=ai_resume_optimizer
@@ -224,14 +224,7 @@ python manage.py runserver 8001
 
 ---
 
-## Next Steps
 
-1. ✅ Authentication module complete
-2. ⏳ Resume management module
-3. ⏳ Job management module
-4. ⏳ Analysis & NLP module
-5. ⏳ Frontend integration
-6. ⏳ Testing & deployment
 
 ---
 

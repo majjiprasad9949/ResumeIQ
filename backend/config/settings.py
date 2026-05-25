@@ -13,9 +13,21 @@ SECRET_KEY = config(
     default='django-insecure-dev-key'
 )
 
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config(
+    'DEBUG',
+    default=False,
+    cast=bool
+)
 
-ALLOWED_HOSTS = import.meta.env.VITE_API_URL
+# =========================
+# HOSTS
+# =========================
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "resumeiq-production.up.railway.app"
+]
 
 
 # =========================
@@ -23,6 +35,7 @@ ALLOWED_HOSTS = import.meta.env.VITE_API_URL
 # =========================
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,25 +55,37 @@ INSTALLED_APPS = [
     'apps.analysis',
 ]
 
+
 # =========================
 # MIDDLEWARE
 # =========================
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
+
     'corsheaders.middleware.CorsMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     'django.middleware.common.CommonMiddleware',
 
     'django.middleware.csrf.CsrfViewMiddleware',
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 
     'django.contrib.messages.middleware.MessageMiddleware',
+
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'config.urls'
+
+
+# =========================
+# TEMPLATES
+# =========================
 
 TEMPLATES = [
     {
@@ -73,6 +98,7 @@ TEMPLATES = [
 
         'OPTIONS': {
             'context_processors': [
+
                 'django.template.context_processors.debug',
 
                 'django.template.context_processors.request',
@@ -85,6 +111,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -93,9 +120,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # =========================
 
 DATABASES = {
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE':
+        'django.db.backends.sqlite3',
+
+        'NAME':
+        BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -105,10 +137,12 @@ DATABASES = {
 # =========================
 
 AUTH_PASSWORD_VALIDATORS = [
+
     {
         'NAME':
         'django.contrib.auth.password_validation.MinimumLengthValidator',
     }
+
 ]
 
 
@@ -157,11 +191,15 @@ AUTH_USER_MODEL = 'users.CustomUser'
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
+
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+
     ),
 
     'DEFAULT_PERMISSION_CLASSES': (
+
         'rest_framework.permissions.IsAuthenticated',
+
     )
 }
 
@@ -190,8 +228,11 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
 
     "http://localhost:5173",
-    "http://localhost:3000",
     "http://localhost:5174",
+
+    "https://resume-iq-uwew.vercel.app",
+    "https://resume-iq-uwew-lx2odcgc4-majjiprasad9949s-projects.vercel.app",
+    "https://resume-iq-uwew-otfnn2fw7-majjiprasad9949s-projects.vercel.app"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -206,18 +247,18 @@ MAX_UPLOAD_SIZE = 10 * 1024 * 1024
 SUPPORTED_RESUME_FORMATS = [
 
     'pdf',
-    'docx',
+    'docx'
 ]
 
 
 # =========================
 # CACHE
-# (Redis removed)
 # =========================
 
 CACHES = {
 
     "default": {
+
         "BACKEND":
         "django.core.cache.backends.locmem.LocMemCache",
     }
