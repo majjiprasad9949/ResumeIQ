@@ -235,8 +235,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://resume-iq-uwew-otfnn2fw7-majjiprasad9949s-projects.vercel.app"
 ]
 
-CORS_ALLOW_CREDENTIALS = True
-
 
 # =========================
 # FILE UPLOAD
