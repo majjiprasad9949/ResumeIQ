@@ -23,10 +23,18 @@ DEBUG = config(
 # HOSTS
 # =========================
 
+# =========================
+# HOSTS
+# =========================
+
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "resumeiq-production.up.railway.app"
+
+    "resumeiq-production.up.railway.app",
+    "resumeiq-production-86fe.up.railway.app",
+
+    ".up.railway.app"
 ]
 
 
