@@ -105,7 +105,7 @@ class UserViewSet(
 
                 {
                     "detail":
-                    "User not found"
+                    "Invalid credentials"
                 },
 
                 status=400
@@ -120,7 +120,7 @@ class UserViewSet(
 
                 {
                     "detail":
-                    "Incorrect password"
+                    "Invalid credentials"
                 },
 
                 status=400
