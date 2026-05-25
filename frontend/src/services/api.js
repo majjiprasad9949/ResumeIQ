@@ -3,22 +3,14 @@ import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-
   baseURL: `${API_URL}/api`,
-
   headers: {
-
     'Content-Type': 'application/json',
-
   },
-
 });
 
-
 // Add token automatically
-
 api.interceptors.request.use(
-
   (config) => {
 
     const token = localStorage.getItem(
@@ -36,12 +28,11 @@ api.interceptors.request.use(
 
   },
 
-  (error) => Promise.reject(error)
-
+  (error)=>Promise.reject(error)
 );
 
 
-// Authentication
+// ================= AUTH =================
 
 export const authService = {
 
@@ -51,7 +42,7 @@ export const authService = {
     email,
     password
 
-  ) =>
+  )=>
 
   api.post(
 
@@ -59,10 +50,10 @@ export const authService = {
 
     {
 
-      username:fullName,
+      username: fullName,
       email,
       password,
-      password_confirm:password
+      password_confirm: password
 
     }
 
@@ -74,7 +65,7 @@ export const authService = {
     email,
     password
 
-  ) => {
+  )=>{
 
     const response = await api.post(
 
@@ -89,7 +80,7 @@ export const authService = {
 
     );
 
-    if (
+    if(
 
       response.data.access
 
@@ -98,6 +89,7 @@ export const authService = {
       localStorage.setItem(
 
         'access_token',
+
         response.data.access
 
       );
@@ -105,6 +97,7 @@ export const authService = {
       localStorage.setItem(
 
         'refresh_token',
+
         response.data.refresh
 
       );
@@ -131,16 +124,16 @@ export const authService = {
 
   getProfile:()=>
 
-    api.get(
+  api.get(
 
-      '/users/me/'
+    '/users/me/'
 
-    )
+  )
 
 };
 
 
-// Resume Service
+// ================= RESUME =================
 
 export const resumeService = {
 
@@ -151,8 +144,7 @@ export const resumeService = {
 
   )=>{
 
-    const formData =
-    new FormData();
+    const formData = new FormData();
 
     formData.append(
 
@@ -193,25 +185,25 @@ export const resumeService = {
 
   list:()=>
 
-    api.get(
+  api.get(
 
-      '/resumes/'
+    '/resumes/'
 
-    ),
+  ),
 
 
   delete:(id)=>
 
-    api.delete(
+  api.delete(
 
-      `/resumes/${id}/`
+    `/resumes/${id}/`
 
-    )
+  )
 
 };
 
 
-// Job Service
+// ================= JOB =================
 
 export const jobService = {
 
@@ -240,11 +232,11 @@ export const jobService = {
 
   list:()=>
 
-    api.get(
+  api.get(
 
-      '/jobs/'
+    '/jobs/'
 
-    ),
+  ),
 
 
   delete:(id)=>
@@ -258,7 +250,7 @@ export const jobService = {
 };
 
 
-// Analysis Service
+// ================= ANALYSIS =================
 
 export const analysisService = {
 
@@ -275,9 +267,8 @@ export const analysisService = {
 
     {
 
-      resume_id:resumeId,
-
-      job_id:jobId
+      resume_id: resumeId,
+      job_id: jobId
 
     }
 
