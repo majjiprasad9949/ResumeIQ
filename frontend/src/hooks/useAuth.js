@@ -1,26 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL
+import { authService } from "../services/api";
 
 export function useAuth() {
 
-    const [
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-        isAuthenticated,
-
-        setIsAuthenticated
-
-    ] = useState(false);
-
-
-    const [
-
-        loading,
-
-        setLoading
-
-    ] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -38,55 +23,19 @@ export function useAuth() {
     }, []);
 
 
-
     async function login(
 
         email,
-
         password
 
-    ) {
+    ){
 
-        console.log(
-            "Sending login request"
-        );
+        const response = await authService.login(
 
-        const response = await axios.post(
-
-            `${API_URL}/login/`,
-
-            {
-
-                email,
-                password
-
-            }
+            email,
+            password
 
         );
-
-        console.log(
-            "Backend response:",
-            response.data
-        );
-
-
-        localStorage.setItem(
-
-            "access_token",
-
-            response.data.access
-
-        );
-
-
-        localStorage.setItem(
-
-            "refresh_token",
-
-            response.data.refresh
-
-        );
-
 
         setIsAuthenticated(
             true
@@ -97,7 +46,6 @@ export function useAuth() {
     }
 
 
-
     async function register(
 
         username,
@@ -105,21 +53,13 @@ export function useAuth() {
         password,
         password_confirm
 
-    ) {
+    ){
 
-        const response = await axios.post(
+        const response = await authService.register(
 
-            `${API_URL}/register/`,
-
-            {
-
-                username,
-                email,
-                password,
-                password_confirm
-
-            }
-
+            username,
+            email,
+            password
         );
 
         return response.data;
@@ -127,16 +67,9 @@ export function useAuth() {
     }
 
 
-
     function logout(){
 
-        localStorage.removeItem(
-            "access_token"
-        );
-
-        localStorage.removeItem(
-            "refresh_token"
-        );
+        authService.logout();
 
         setIsAuthenticated(
             false
