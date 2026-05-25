@@ -164,7 +164,6 @@ USE_TZ = True
 # =========================
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
@@ -173,7 +172,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # =========================
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
@@ -225,15 +223,9 @@ SIMPLE_JWT = {
 # CORS
 # =========================
 
-CORS_ALLOWED_ORIGINS = [
-
-    "http://localhost:5173",
-    "http://localhost:5174",
-
-    "https://resume-iq-uwew.vercel.app",
-    "https://resume-iq-uwew-lx2odcgc4-majjiprasad9949s-projects.vercel.app",
-    "https://resume-iq-uwew-otfnn2fw7-majjiprasad9949s-projects.vercel.app"
-]
+# Temporary debugging mode
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 # =========================
@@ -243,7 +235,6 @@ CORS_ALLOWED_ORIGINS = [
 MAX_UPLOAD_SIZE = 10 * 1024 * 1024
 
 SUPPORTED_RESUME_FORMATS = [
-
     'pdf',
     'docx'
 ]
